@@ -8,7 +8,7 @@ const port = 3000
 
 app.use(express.static(path.join(__dirname,'public')));
 
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 
 app.engine('hbs', engine({
   extname: '.hbs'
@@ -21,15 +21,21 @@ app.set('views', path.join(__dirname, 'resource/views'))
 
 app.get('/', (req, res) => {
   res.render('home')
-})
+});
 
 app.get('/news', (req, res) => {
   res.render('news');
-})
+});
 
 app.get('/forms', (req, res) => {
   res.render('forms');
-})
+});
+
+app.get('/search', (req, res) => {
+  console.log(req.query.q);
+  res.render('search');
+});
+
 
 // 127.0.0.1 - localhost
 app.listen(port, () => {
