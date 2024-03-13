@@ -3,6 +3,8 @@ const express = require('express');
 const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 
+const route = require('./routes');
+
 const app = express();
 const port = 3000
 
@@ -21,31 +23,9 @@ app.engine('hbs', engine({
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resource/views'))
-//route
 
-
-app.get('/', (req, res) => {
-  res.render('home')
-});
-
-app.get('/news', (req, res) => {
-  res.render('news');
-});
-
-app.get('/forms', (req, res) => {
-  res.render('forms');
-});
-
-app.get('/search', (req, res) => {
-  res.render('search');
-});
-
-
-app.post('/search', (req, res) => {
-  console.log(req.body);
-  res.send('');
-});
-
+// Routes init
+route(app);
 
 // 127.0.0.1 - localhost
 app.listen(port, () => {
