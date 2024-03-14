@@ -4,3 +4,80 @@
 
 h1 {
   color: red; }
+
+:root {
+  --link-color: #0095f6;
+  --link-hover-color: #00376B;
+  --icon-size: 1.5rem;
+  --left-navbar-weight: 200px;
+  --story-size: 3.5rem;
+  --poster-avt-size: 34px;
+  --line-height: 16px;
+  --font-weight: 600;
+  --sub-text: rgb(136, 136, 136);
+  /* --main-color: linear-gradient(60deg, yellow 20%, rgb(205, 0, 48) 60%, rgb(234, 0, 172)); */
+  --main-color: linear-gradient(60deg, yellow 20%, rgb(205, 0, 48) 60%, rgb(191, 0, 229)); }
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Instagram Sans UI'; }
+
+a {
+  text-decoration: none; }
+
+/* Left */
+/* Menu bar */
+.left-navbar {
+  position: fixed;
+  width: var(--left-navbar-weight);
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px 20px 12px;
+  height: 100%;
+  border-right: 1px solid gainsboro; }
+
+.left-navbar .menu {
+  padding: 12px;
+  margin: 8px auto;
+  border-radius: 10px;
+  transition: 0.33s; }
+
+.logo {
+  padding: 25px 12px 16px 12px; }
+
+figure {
+  display: flex;
+  margin: 0; }
+
+figure img {
+  width: var(--icon-size);
+  height: auto; }
+
+figcaption {
+  padding-left: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  line-height: var(--icon-size);
+  color: black; }
+
+.menu:hover {
+  background: rgba(164, 164, 164, 0.2);
+  text-decoration: none; }
+
+.menu:hover figcaption {
+  text-decoration: none; }
+
+.menu:focus {
+  font-weight: var(--font-weight); }
+
+.bottom {
+  margin-top: auto;
+  margin-bottom: 20px; }
+
+/* Inside Content */
+.center-content {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  margin-left: calc( var(--left-navbar-weight) + 24px); }
