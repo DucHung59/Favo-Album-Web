@@ -1,6 +1,8 @@
 const Course = require('../model/Course');
 const Account = require('../model/Account');
 
+const {mutlipleMongooseToObject} = require('../../util/mongoose.js');
+const mongoose = require('../../util/mongoose.js');
 
 class SiteController {
     
@@ -28,8 +30,12 @@ class SiteController {
         // res.render('news');
 
         Course.find({})
-            .then(courses => res.render('news', { courses }))
-            .catch(err => next(err))
+            .then(courses =>{ 
+                res.render('news', { 
+                    courses: mutlipleMongooseToObject(courses) 
+                })
+            })
+            .catch(next)
     }
     
     async index(req, res) {
