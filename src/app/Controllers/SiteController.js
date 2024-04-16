@@ -20,7 +20,7 @@ class SiteController {
         //     .catch(err => next(err))
     }
     
-    async news(req, res, next) {
+    async courses(req, res, next) {
         // try {
         //     const account = await Account.find({});
         //     res.json(account);
@@ -31,7 +31,7 @@ class SiteController {
 
         Course.find({})
             .then(courses =>{ 
-                res.render('news', { 
+                res.render('courses', { 
                     courses: mutlipleMongooseToObject(courses) 
                 })
             })
