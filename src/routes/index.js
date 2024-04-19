@@ -1,8 +1,8 @@
 const siteRouter = require('./site');
-const coursesRouter = require('./courses')
+const albumRouter = require('./album')
 
 function route(app) {
-    app.use('/courses', coursesRouter);
+    app.use('/album', albumRouter);
     app.use('/', siteRouter);
 }
 

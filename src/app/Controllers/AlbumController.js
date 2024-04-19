@@ -1,30 +1,30 @@
-const Course = require('../model/Course');
+const Album = require('../model/Album');
 
 const {mongooseObject} = require('../../util/mongoose')
 
-class CourseController {
+class AlbumController {
     async show(req, res, next) {
-        Course.findOne({slug: req.params.slug})
-            .then((course) => {
-                res.render('courses/show', {
-                    course: mongooseObject(course)
+        Album.findOne({slug: req.params.slug})
+            .then((album) => {
+                res.render('album/show', {
+                    album: mongooseObject(album)
                 });
             })
             .catch(next)
     }
     // [GET]
     async create(req, res, next) {
-        res.render('courses/create');
+        res.render('album/create');
     }
     //[POST]
     async store(req, res, next) {
         // res.json(req.body);
         const formData = req.body;
         formData.img = `https://i.ytimg.com/vi/${req.body.videoId}/hqdefault.jpg`;
-        const course = new Course(req.body);
-        course.save()
+        const album = new Album(req.body);
+        album.save()
             .then(() => {
-                res.redirect('/courses')
+                res.redirect('/albums')
             })
             .catch(err => {
                 
@@ -32,4 +32,4 @@ class CourseController {
     }
 }
 
-module.exports = new CourseController();
+module.exports = new AlbumController();

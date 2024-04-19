@@ -6,7 +6,7 @@ mongoose.plugin(slug);
 
 const Schema = mongoose.Schema;
 
-const Course = new Schema({
+const Album = new Schema({
   name: { type: String, require: true },
   description: { type: String, maxlength: 600 },
   img: { type: String, maxlength: 255 },
@@ -17,4 +17,4 @@ const Course = new Schema({
   }
 )
 
-module.exports = mongoose.model('Course', Course);
+module.exports = mongoose.model('Album', Album);

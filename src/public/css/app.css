@@ -68,7 +68,7 @@ figcaption {
   background: rgba(164, 164, 164, 0.2);
   text-decoration: none; }
 
-.menu:hover figcaption {
+.menu:hover a {
   text-decoration: none; }
 
 .menu:focus {

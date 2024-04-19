@@ -1,4 +1,4 @@
-const Course = require('../model/Course');
+const Album = require('../model/Album');
 const Account = require('../model/Account');
 
 const { mutlipleMongooseToObject } = require('../../util/mongoose.js');
@@ -19,6 +19,15 @@ class SiteController {
         //     .then(courses => res.render('search'))
         //     .catch(err => next(err))
     }
+
+    async album(req, res, next) {
+        Album.find({})
+            .then(albums => res.render('albums', { 
+                albums: mutlipleMongooseToObject(albums) 
+            }))
+            .catch(next)
+            
+    }
     
     async courses(req, res, next) {
         // try {
@@ -31,9 +40,7 @@ class SiteController {
 
         Course.find({})
             .then(courses =>{ 
-                res.render('courses', { 
-                    courses: mutlipleMongooseToObject(courses) 
-                })
+                res.render()
             })
             .catch(next)
     }
