@@ -1,4 +1,4 @@
-<div class="mt-4 mb-4">
+<div class="mt-4 mb-4 container">
     <div class="row" style="margin-right: 0;">
         {{#each albums}}
         <div class="col-sm-6 col-lg-3">
@@ -6,12 +6,12 @@
                 <a href="/album/{{this.slug}}">
                     <img src="{{this.img}}" class="card-img-top" alt="...">
                 </a>
-                <div class="card-body">
+                <div class="card-body position-relative" style="min-height: 180px;">
                     <a href="/album/{{this.slug}}">
                         <h5 class="card-title">{{this.name}}</h5>
                     </a>
                     <p class="card-text" style="display: -webkit-box; width: auto; height: auto; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{this.description}}</p>
-                    <a href="/album/{{this.slug}}" class="btn btn-primary">Nghe</a>
+                    <a href="/album/{{this.slug}}" class="btn btn-primary position-absolute" style="bottom: 20px">Nghe</a>
                 </div>
             </div>
         </div>

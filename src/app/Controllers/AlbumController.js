@@ -16,6 +16,23 @@ class AlbumController {
     async create(req, res, next) {
         res.render('album/create');
     }
+
+    async edit(req, res, next) {
+        Album.findById(req.params.id)
+            .then(album => res.render('album/edit', {
+                album: mongooseObject(album)
+            }))
+            .catch(next)
+        
+    }
+
+    //[PUT] 
+    async update(req, res, next) {
+        Album.updateOne({_id: req.params.id}, req.body)
+            .then(() => res.redirect('/me/stored/album'))
+            .catch(next)
+    }
+
     //[POST]
     async store(req, res, next) {
         // res.json(req.body);

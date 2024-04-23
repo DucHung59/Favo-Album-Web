@@ -1,0 +1,18 @@
+<div class="mt-4">
+    <h3>Album Update</h3>
+    <form method="post" action="/album/{{album._id}}?_method=PUT">
+        <div class="form-group">
+            <label for="description">Tên album</label>
+            <input type="text" class="form-control"  value="{{album.name}}" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea class="form-control" id="description" name="description">{{album.description}}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="description">Video ID</label>
+            <input type="text" class="form-control" value="{{album.videoId}}" id="videoId" name="videoId">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>

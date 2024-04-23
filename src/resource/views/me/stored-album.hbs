@@ -1,0 +1,27 @@
+<div class="mt-4 container">
+    <h2>MY ALBUM</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Chi tiết</th>
+                <th scope="col" colspan="2">Thời gian</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each albums}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.createdAt}}</td>
+                <td class="d-flex flex-row">
+                    <a type="button" href="/album/{{this._id}}/edit" class="btn btn-outline-primary mr-2">Sửa</a>
+                    <a type="button" href="" class="btn btn-outline-primary">Xóa</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

@@ -2,10 +2,12 @@ const express = require('express');
 var router = express.Router();
 
 
-const courseController = require('../app/controllers/AlbumController.js');
+const albumController = require('../app/controllers/AlbumController.js');
 
-router.get('/create', courseController.create);
-router.post('/store', courseController.store);
-router.get('/:slug', courseController.show);
+router.get('/create', albumController.create);
+router.post('/store', albumController.store);
+router.get('/:id/edit', albumController.edit);
+router.put('/:id', albumController.update);
+router.get('/:slug', albumController.show);
 
 module.exports = router;
