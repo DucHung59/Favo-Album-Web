@@ -4,9 +4,9 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tên</th>
-                <th scope="col">Chi tiết</th>
-                <th scope="col" colspan="2">Thời gian</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col" colspan="2">Time Up</th>
             </tr>
         </thead>
         <tbody>
@@ -17,11 +17,55 @@
                 <td>{{this.description}}</td>
                 <td>{{this.createdAt}}</td>
                 <td class="d-flex flex-row">
-                    <a type="button" href="/album/{{this._id}}/edit" class="btn btn-outline-primary mr-2">Sửa</a>
-                    <a type="button" href="" class="btn btn-outline-primary">Xóa</a>
+                    <a type="button" href="/album/{{this._id}}/edit" class="btn btn-outline-primary mr-2">Modify</a>
+                    <a type="button" href="" class="btn btn-outline-primary" data-id="{{this._id}}" data-toggle="modal"
+                        data-target="#alertDelete" >Delete</a>
                 </td>
             </tr>
             {{/each}}
         </tbody>
     </table>
 </div>
+
+{{!-- Confirm delete --}}
+<div class="modal" tabindex="-1" role="dialog" id="alertDelete">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure about that?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btnDelete">Delete</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Delete hidden form --}}
+
+<form action="" method="post" name="delete-form"></form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var id;
+        var deleteForm = document.forms['delete-form'];
+        
+        $('#alertDelete').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            id = button.data('id');
+            console.log(id);
+        })
+
+        document.getElementById('btnDelete').onclick = function () {
+            deleteForm.action = `/album/${id}?_method=DELETE`;
+            deleteForm.submit();
+        }
+    })
+</script>

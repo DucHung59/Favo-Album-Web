@@ -11,7 +11,7 @@ const Album = new Schema({
   description: { type: String, maxlength: 600 },
   img: { type: String, maxlength: 255 },
   videoId: {type: String, require: true},
-  slug: { type: String, slug: 'name' }
+  slug: { type: String, slug: 'name', unique: true }
 }, {
   timestamps: true
   }

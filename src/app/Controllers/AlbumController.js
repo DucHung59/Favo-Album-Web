@@ -33,6 +33,13 @@ class AlbumController {
             .catch(next)
     }
 
+    //[DELETE]
+    async delete(req, res, next) {
+        await Album.deleteOne({_id: req.params.id})
+            .then(() => res.redirect('back'))
+            .catch(next)
+    }
+
     //[POST]
     async store(req, res, next) {
         // res.json(req.body);
