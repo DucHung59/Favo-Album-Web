@@ -107,6 +107,11 @@ figcaption {
     margin-left: calc( var(--left-navbar-weight) + 24px );
 }
 
+.trashIcon:hover {
+    transition: 0.3s;
+    opacity: 0.5;
+}
+
 
 
 

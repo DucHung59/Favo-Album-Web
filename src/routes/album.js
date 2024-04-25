@@ -8,6 +8,7 @@ router.get('/create', albumController.create);
 router.post('/store', albumController.store);
 router.get('/:id/edit', albumController.edit);
 router.put('/:id', albumController.update);
+router.patch('/:id/restore', albumController.restore);
 router.delete('/:id', albumController.delete);
 router.get('/:slug', albumController.show);
 
