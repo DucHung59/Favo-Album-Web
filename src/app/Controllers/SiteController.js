@@ -29,8 +29,12 @@ class SiteController {
             
     }
     
-    async index(req, res) {
-        res.render('home');
+    async index(req, res, next) {
+        Account.find({})
+            .then(account => res.render('home', {
+                account: mutlipleMongooseToObject(account)
+            }))
+            .catch(next)
     }
 }
 

@@ -16,7 +16,6 @@ const Album = new Schema({
 )
 
 // Add plug place
-mongoose.plugin(slug);
 Album.plugin(mongooseDelete, { 
   deletedAt: true,
   overrideMethods: 'all'

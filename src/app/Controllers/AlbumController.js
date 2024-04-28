@@ -54,13 +54,11 @@ class AlbumController {
         const formData = req.body;
         formData.img = `https://i.ytimg.com/vi/${req.body.videoId}/hqdefault.jpg`;
         const album = new Album(req.body);
-        album.save()
+        await album.save()
             .then(() => {
                 res.redirect('/albums')
             })
-            .catch(err => {
-                
-            })
+            .catch(next)
     }
 }
 

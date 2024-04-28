@@ -10,6 +10,7 @@ class MeController {
             }))
             .catch(next)
     }
+    
     async trashAlbum(req, res, next) {
         Album.findWithDeleted({ deleted: true })
             .then(album => res.render('me/trash-album', {

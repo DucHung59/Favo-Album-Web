@@ -1,3 +1,11 @@
-<div class="mt-4 mr-4">
-    
+<div class="mt-4 container">
+    {{#each account}}
+    <div class="media mt-4 ">
+        <img class="mr-3 rounded-circle" src="{{this.avt}}" alt="Generic placeholder image" width="64px" height="64px">
+        <div class="media-body">
+            <h5 class="mt-0">{{this.name}}</h5>
+            {{this.email}}
+        </div>
+    </div>
+    {{/each}}
 </div>
