@@ -4,10 +4,13 @@ const { mutlipleMongooseToObject } = require('../../util/mongoose')
 
 class MeController {
     async storedAlbum(req, res, next) {
-        Album.find({})
-            .then(album => res.render('me/stored-album', {
-                album: mutlipleMongooseToObject(album)
-            }))
+        Promise.all([Album.find({}), Album.countDocumentsWithDeleted({deleted: true})])
+            .then(([album, count]) => {
+                res.render('me/stored-album', {
+                    count,
+                    album: mutlipleMongooseToObject(album)
+                })
+            })
             .catch(next)
     }
     
