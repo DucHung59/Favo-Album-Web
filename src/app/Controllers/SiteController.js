@@ -2,7 +2,6 @@ const Album = require('../model/Album');
 const Account = require('../model/Account');
 
 const { mutlipleMongooseToObject } = require('../../util/mongoose.js');
-const mongoose = require('../../util/mongoose.js');
 
 class SiteController {
     

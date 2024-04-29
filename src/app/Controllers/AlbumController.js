@@ -66,11 +66,10 @@ class AlbumController {
         switch (req.body.action) {
             case 'delete': {
                 await Album.delete({ _id: { $in: req.body.albumIds} })
-                    .then(() => res.redirect('/me/trash/album'))
+                    .then(() => res.redirect('back'))
                     .catch(next)
             }
             default: {
-                return res.redirect('back');
             }
         }
     }
