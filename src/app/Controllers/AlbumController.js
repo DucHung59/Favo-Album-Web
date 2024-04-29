@@ -1,10 +1,10 @@
 const Album = require('../model/Album');
 
-const {mongooseObject} = require('../../util/mongoose')
+const { mongooseObject } = require('../../util/mongoose')
 
 class AlbumController {
     async show(req, res, next) {
-        Album.findOne({slug: req.params.slug})
+        Album.findOne({ slug: req.params.slug })
             .then((album) => {
                 res.render('album/show', {
                     album: mongooseObject(album)
@@ -24,26 +24,26 @@ class AlbumController {
                 album: mongooseObject(album)
             }))
             .catch(next)
-        
+
     }
 
     //[PUT] 
     async update(req, res, next) {
-        Album.updateOne({_id: req.params.id}, req.body)
+        Album.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/me/stored/album'))
             .catch(next)
     }
 
     //[PATCH]
-    async restore(req, res, next){
-        Album.restore({_id: req.params.id})
+    async restore(req, res, next) {
+        Album.restore({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next)
     }
 
     //[DELETE]
     async delete(req, res, next) {
-        await Album.delete({_id: req.params.id})
+        await Album.delete({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next)
     }
@@ -59,6 +59,21 @@ class AlbumController {
                 res.redirect('/albums')
             })
             .catch(next)
+    }
+    // [POST]
+    async formActions(req, res, next) {
+        switch (req.body.action) {
+            case 'delete': {
+                await Album.delete({ _id: { $in: req.body.albumIds} })
+                    .then(() => res.redirect('back'))
+                    .catch(next)
+            }
+            case 'restore': {
+            }
+            default: {
+                return res.redirect('back');
+            }
+        }
     }
 }
 

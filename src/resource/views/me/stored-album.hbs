@@ -1,14 +1,40 @@
-<div class="mt-4 container">
-    <div class="d-flex justify-content-between">
+<form class="mt-4 container" method="post" action="/album/form-actions/">
+    <div class="d-flex justify-content-between mb-4">
         <h2>MY ALBUM</h2>
-        <a href="/me/trash/album" class="trashIcon">
-            <img src="https://cdn-icons-png.flaticon.com/128/542/542724.png" width="40px" height="auto" alt="">
-            <span class="font-weight-bold text-danger font-italic">({{count}})</span>
-        </a>
+        <div class="d-flex">
+            <div class="d-flex mr-4 text-center align-items-center">
+                <div class="mr-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="cb_DeleteAll" value="option1"
+                            aria-label="...">
+                        <label class="form-check-label" for="cb_DeleteAll">Chọn tất cả</label>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="selectActions">Options</label>
+                        </div>
+                        <select class="custom-select" id="selectActions" name="action" required>
+                            <option value="">Choose</option>
+                            <option value="delete">Delete</option>
+                            <option value="create">Create</option>
+                            <option value="restore">Restore All</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-info disabled" id="btnDeleteAll">Delete all</button>
+            </div>
+
+            <a href="/me/trash/album" class="trashIcon">
+                <img src="https://cdn-icons-png.flaticon.com/128/542/542724.png" width="40px" height="auto" alt="">
+                <span class="font-weight-bold text-danger font-italic">({{count}})</span>
+            </a>
+        </div>
     </div>
     <table class="table">
         <thead>
             <tr>
+                <th scope="col"></th>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
@@ -18,6 +44,11 @@
         <tbody>
             {{#each album}}
             <tr>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="albumIds[]" value="{{this._id}}">
+                    </div>
+                </td>
                 <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.description}}</td>
@@ -38,7 +69,7 @@
             {{/each}}
         </tbody>
     </table>
-</div>
+</form>
 
 {{!-- Confirm delete --}}
 <div class="modal" tabindex="-1" role="dialog" id="alertDelete">
@@ -69,7 +100,11 @@
     document.addEventListener('DOMContentLoaded', function () {
         var id;
         var deleteForm = document.forms['delete-form'];
-
+        var cbDeleteAll = $('#cb_DeleteAll');
+        var cbDeleteItem = $('input[name="albumIds[]"]');
+        var btnDeleteAll = $('#btnDeleteAll');
+        var selectActions = $('#selectActions');
+        
         $('#alertDelete').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             id = button.data('id');
@@ -80,5 +115,27 @@
             deleteForm.action = `/album/${id}?_method=DELETE`;
             deleteForm.submit();
         }
+
+        cbDeleteAll.change(function () {
+            var isCheckedAll = $(this).prop('checked')
+            cbDeleteItem.prop('checked', isCheckedAll);
+            ableSubmitBtn();
+        })
+
+        cbDeleteItem.change(function () {
+            var isCheckedAll = cbDeleteItem.length === $('input[name="albumIds[]"]:checked').length;
+            cbDeleteAll.prop('checked', isCheckedAll);
+            ableSubmitBtn();
+        })
+
+        function ableSubmitBtn() {
+            var checkedCount = $('input[name="albumIds[]"]:checked').length;
+            if (checkedCount > 0) {
+                btnDeleteAll.removeClass('disabled');
+            } else {
+                btnDeleteAll.addClass('disabled');
+            }
+        }
+
     })
 </script>
