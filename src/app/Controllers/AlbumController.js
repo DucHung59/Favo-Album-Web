@@ -60,15 +60,14 @@ class AlbumController {
             })
             .catch(next)
     }
+
     // [POST]
     async formActions(req, res, next) {
         switch (req.body.action) {
             case 'delete': {
                 await Album.delete({ _id: { $in: req.body.albumIds} })
-                    .then(() => res.redirect('back'))
+                    .then(() => res.redirect('/me/trash/album'))
                     .catch(next)
-            }
-            case 'restore': {
             }
             default: {
                 return res.redirect('back');
