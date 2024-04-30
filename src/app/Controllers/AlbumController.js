@@ -1,13 +1,15 @@
 const Album = require('../model/Album');
 
 const { mongooseObject } = require('../../util/mongoose')
+const { mutlipleMongooseToObject } = require('../../util/mongoose')
 
 class AlbumController {
     async show(req, res, next) {
-        Album.findOne({ slug: req.params.slug })
-            .then((album) => {
+        Promise.all([Album.find({}), Album.findOne({ slug: req.params.slug })])
+            .then(([albums, album]) => {
                 res.render('album/show', {
-                    album: mongooseObject(album)
+                    album: mongooseObject(album),
+                    albums: mutlipleMongooseToObject(albums),
                 });
             })
             .catch(next)

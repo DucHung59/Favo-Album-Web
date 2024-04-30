@@ -94,3 +94,6 @@ figcaption {
 
 .disabled {
   pointer-events: none !important; }
+
+a:hover {
+  text-decoration: none; }
